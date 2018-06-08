@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  postgresql.data:
+    environment:
+      - POSTGRES_PASSWORD=postgres1
+      - POSTGRES_USER=test-user
+    ports:
+      - "5432:5432"
+
+  testapp:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DbConnectionString=${TR_DB:-Host=postgresql.data;Port=5432;Database=users;Username=test-user;Password=postgres1}
+    ports:
+      - "7777:80"

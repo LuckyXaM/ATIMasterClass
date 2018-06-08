@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  postgresql.data:
+    image: postgres
+
+  testapp:
+    image: testapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgresql.data
