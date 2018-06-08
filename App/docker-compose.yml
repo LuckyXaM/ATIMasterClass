@@ -8,6 +8,6 @@ services:
     image: testapp
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Test_App/Dockerfile
     depends_on:
       - postgresql.data
