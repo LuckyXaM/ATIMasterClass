@@ -1,0 +1,12 @@
+Реплики:
+	spec:
+	  replicas: 5
+
+Порты:
+	spec:
+	  type: NodePort
+	  ports:
+	  - name: http
+		protocol: TCP
+		port: 80
+		nodePort: 31111
