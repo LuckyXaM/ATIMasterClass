@@ -10,3 +10,14 @@
 		protocol: TCP
 		port: 80
 		nodePort: 31111
+		
+Ноды:
+	hostnamectl set-hostname 'new-hostname'
+	kubeadm join 172.24.121.30:6443 --token wuhn9l.xdusxz0aku1zfnzk --discovery-token-ca-cert-hash sha256:22172b01e36e756fd44395c4cdb41ed5674ceaa1782bc74288ec2b4d43030a38
+	
+	ip link delete cni0
+    ip link delete flannel.1
+	
+	spec:
+      spec:
+	    nodeName: 'new-hostname'

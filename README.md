@@ -50,17 +50,19 @@ EOF
 sudo swapoff -a  
 sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
 
-ifconfig
 sudo sysctl net.bridge.bridge-nf-call-iptables=1
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=172.17.211.99 
+ifconfig
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.64.46
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
+kubectl get pods --all-namespaces
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
 
 kubectl taint nodes --all node-role.kubernetes.io/master-
+
 
 3. Устанавливаем dashboard:
 
@@ -71,7 +73,7 @@ kubectl create -f dashboard-admin.yaml
 kubectl create -f kubernetes-dashboard.yaml
 
 kubectl get secrets -n kube-system
-kubectl describe secret kubernetes-dashboard-token-n5lnk -n kube-system
+kubectl describe secret kubernetes-dashboard-token-h8plh -n kube-system
 
 kubectl get services -n kube-system
 
