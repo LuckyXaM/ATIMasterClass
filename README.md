@@ -19,14 +19,31 @@ git clone https://github.com/LuckyXaM/ATIMasterClass
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ----------------------------------------- Установка Docker -----------------------------------------
+sudo apt-get update && sudo apt-get install -y curl
 
 1. Устанавливаем docker:
 
-sudo apt-get update && sudo apt-get install -y docker.io
+((sudo apt-get update && sudo apt-get install -y docker.io))
+
+Сылка: https://docs.docker.com/install/linux/docker-ce/ubuntu/#extra-steps-for-aufs
+
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install docker-ce
 
 2. Устанавливаем docker-compose:
 
-sudo apt-get update && sudo apt-get install -y curl
 sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
@@ -52,7 +69,7 @@ sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
 
 sudo sysctl net.bridge.bridge-nf-call-iptables=1
 ifconfig
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.64.46
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=172.24.121.23
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -73,7 +90,7 @@ kubectl create -f dashboard-admin.yaml
 kubectl create -f kubernetes-dashboard.yaml
 
 kubectl get secrets -n kube-system
-kubectl describe secret kubernetes-dashboard-token-h8plh -n kube-system
+kubectl describe secret kubernetes-dashboard-token-w4hk9 -n kube-system
 
 kubectl get services -n kube-system
 
