@@ -1,9 +1,9 @@
-FROM microsoft/dotnet:2.1-sdk
+FROM microsoft/dotnet:2.1-sdk as build
 WORKDIR /app
 COPY . .
 WORKDIR /app/Test_App
-RUN ls
-RUN dotnet publish Test_App.csproj -c Release
-WORKDIR /app/Test_App/bin/Release/netcoreapp2.1/publish/
-FROM microsoft/dotnet:2.1-aspnetcore-runtime
-ENTRYPOINT /bin/bash -c "dotnet Test_App.dll"
+RUN dotnet publish -c Release
+FROM microsoft/dotnet:2.1-aspnetcore-runtime as final
+COPY --from=build /app .
+WORKDIR /Test_App/bin/Release/netcoreapp2.1/publish/
+ENTRYPOINT ["dotnet", "Test_App.dll"]
