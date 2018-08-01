@@ -44,7 +44,7 @@ namespace Test_App.Controllers
         /// </summary>
         /// <param name="name">Имя пользователя</param>
         /// <returns></returns>
-        [HttpPut("add/{name}")]
+        [HttpPost("add/{name}")]
         public async Task<User> AddAsync(string name)
         {
             return await _userService.AddAsync(name);
@@ -88,7 +88,7 @@ namespace Test_App.Controllers
         /// <param name="userId">Ид пользователя</param>
         /// <param name="name">Имя пользователя</param>
         /// <returns></returns>
-        [HttpPost("update/{userId}/{name}")]
+        [HttpPut("update/{userId}/{name}")]
         public async Task<User> UpdateAsync(Guid userId, string name)
         {
             return await _userService.UpdateAsync(userId, name);
