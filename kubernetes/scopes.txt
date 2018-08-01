@@ -26,6 +26,8 @@
       spec:
 	    nodeName: 'new-hostname'
 		
+	!!kubeadm reset!! - не нажимать
+		
 Лимиты: (https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
     spec:
 		spec:
