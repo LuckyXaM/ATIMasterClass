@@ -13,9 +13,6 @@ kind: Service
 metadata:
   name: test-application
   namespace: test-app
-  labels:
-    app: test-app
-    component: app
 spec:
   type: NodePort
   ports:
@@ -51,9 +48,6 @@ kind: Service
 metadata:
   name: postgresql-data
   namespace: test-app
-  labels:
-    app: test-app
-    component: postgres
 spec:
   type: NodePort
   ports:

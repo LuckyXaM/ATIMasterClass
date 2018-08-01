@@ -10,6 +10,10 @@
 		protocol: TCP
 		port: 80
 		nodePort: 31111
+				
+	spec:
+      externalIPs:
+      - 172.24.121.23
 		
 Ноды:
 	hostnamectl set-hostname 'new-hostname'
@@ -21,3 +25,15 @@
 	spec:
       spec:
 	    nodeName: 'new-hostname'
+		
+Лимиты: (https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
+    spec:
+		spec:
+		  containers:
+			resources:
+			  limits:
+				memory: 512Mi
+				cpu: "0.75"
+			  requests:
+				memory: 256Mi
+				cpu: "0.75"
