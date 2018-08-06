@@ -16,7 +16,7 @@
       - 172.24.121.23
 		
 Ноды:
-	hostnamectl set-hostname 'new-hostname'
+	hostnamectl set-hostname 'test18'
 	kubeadm join 172.24.121.30:6443 --token wuhn9l.xdusxz0aku1zfnzk --discovery-token-ca-cert-hash sha256:22172b01e36e756fd44395c4cdb41ed5674ceaa1782bc74288ec2b4d43030a38
 	
 	ip link delete cni0

@@ -33,7 +33,7 @@ sudo apt-get install \
     ca-certificates \
     curl \
     software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 sudo apt-key fingerprint 0EBFCD88
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
@@ -53,9 +53,9 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 1. Добавим репозиторий k8s в нашу систему:
 
-sudo apt-get update && sudo apt-get install -y apt-transport-https
-sudo apt-get update && sudo apt-get install -y curl
-sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo apt-get update && apt-get install -y apt-transport-https
+sudo apt-get update && apt-get install -y curl
+sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 sudo chmod -R 777 /etc/apt/sources.list.d/
 
 sudo cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
@@ -64,12 +64,12 @@ EOF
 
 2. Устанавливаем Kubernetes:
 
-sudo swapoff -a  
-sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
+sudo swapoff -a  (https://askubuntu.com/questions/440326/how-can-i-turn-off-swap-permanently)
+sudo apt-get update && apt-get install -y kubelet kubeadm kubectl
 
 sudo sysctl net.bridge.bridge-nf-call-iptables=1
 ifconfig
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=172.24.121.23
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.64.49
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -85,12 +85,13 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 
 cd /home/test/ATIMasterClass/kubernetes/
 
-kubectl create secret generic kubernetes-dashboard-certs --from-file=/home/test/ATIMasterClass/kubernetes/ -n kube-system
+(https://www.akadia.com/services/ssh_test_certificate.html) - как сгенерить серт
+kubectl create secret generic kubernetes-dashboard-certs --from-file=/home/Projects/kubernetes/certs/ -n kube-system
 kubectl create -f dashboard-admin.yaml
 kubectl create -f kubernetes-dashboard.yaml
 
 kubectl get secrets -n kube-system
-kubectl describe secret kubernetes-dashboard-token-w4hk9 -n kube-system
+kubectl describe secret kubernetes-dashboard-token-g9xtj -n kube-system
 
 kubectl get services -n kube-system
 
